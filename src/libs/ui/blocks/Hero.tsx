@@ -15,12 +15,18 @@ export const Hero: FC<HeroProps> = ({ title, description }) => {
             <p className="text-p-md md:text-p max-w-2xl text-primary/80 mb-8">
                 {description}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap justify-center">
                 <a
                     href="#features"
                     className="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-lg transition-all"
                 >
                     Explore Features <ArrowRight size={20} />
+                </a>
+                <a
+                    href="/content"
+                    className="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-lg transition-all"
+                >
+                    Content Capture <ArrowRight size={20} />
                 </a>
                 <a
                     href="https://github.com/codexcodethemes/astro-starter"

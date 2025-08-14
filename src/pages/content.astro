@@ -1,0 +1,10 @@
+---
+import Layout from 'layouts/Layout.astro';
+import { ContentApp } from '@libs/content';
+---
+
+<Layout title="Content" description="Capture & Unfurl URLs"> 
+  <main class="bg-secondary min-h-screen py-10 px-4">
+    <ContentApp client:load />
+  </main>
+</Layout>

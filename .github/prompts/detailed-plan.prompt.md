@@ -3,7 +3,9 @@ mode: 'agent'
 description: 'Create a proposal'
 ---
 
-I want to build an app. My idea is a mobile app called GitBey that takes a user's github handle and returns 5 Beyonce songs based on the vibe of their last 50 commits. User should be able to play the songs in the app.
+Your goal is to create a project proposal for a specification document provided to you.
+
+Before generating the implementation plan, be sure to review the file in "../../docs/idea.md" to understand an overview of the project.
 
 Let's join forces to make this idea into a simple, yet impactful proposal.
 
@@ -36,5 +38,3 @@ The correct repo is LadyKerr/advocatehub
 ## 4. MVP Scope
 -Provide a basic MVP scope that could be delivered quickly to validate this idea.
 ```
-
-Output your plan in the directory "../../docs/idea.md"

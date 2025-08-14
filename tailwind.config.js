@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+    // Enable system dark mode (can be toggled later with class strategy if needed)
+    darkMode: 'media',
     theme: {
         screens: {
             base: "0px",
@@ -13,6 +15,7 @@ module.exports = {
         },
         extend: {
             colors: {
+                // Legacy (kept for backward compatibility where used)
                 primary: "#FFFFFF",
                 secondary: "#111111",
                 accent: "#3B82F6",
@@ -20,6 +23,25 @@ module.exports = {
                 warning: "#F59E0B",
                 error: "#EF4444",
                 info: "#3B82F6",
+                // New pastel palette (accessible tones chosen for >4.5:1 contrast on white where used for text)
+                ink: "#1F2A33",
+                brand: {
+                    DEFAULT: '#7C5CFC', // violet accent
+                    soft: '#B5A3FF',
+                    fg: '#4328C2'
+                },
+                surface: {
+                    DEFAULT: '#FFFFFF',
+                    alt: '#F2F5F9',
+                    subtle: '#E9EEF4'
+                },
+                pastel: {
+                    mint: '#D1F5E1',
+                    sky: '#D6ECFF',
+                    lavender: '#E3D7FF',
+                    peach: '#FFD9C9',
+                    lemon: '#FFF6C6'
+                }
             },
             container: {
                 center: true,
@@ -95,6 +117,7 @@ module.exports = {
                 md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
                 lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
                 xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+                glass: "0 4px 24px -2px rgba(31,42,51,0.08), 0 2px 4px rgba(31,42,51,0.06)",
             },
             transitionDuration: {
                 DEFAULT: "300ms",

@@ -1,11 +1,14 @@
 ### Idea: 
-I want to build an app that easily allows developer advocates to keep track of all the content they create. Advocates create a mixture of technical blog posts, short form videos for social media, long form youtube videos, webinars, livestreams, workshops, and demo content. They often use different platforms such as twitch, youtube, github, eventbrite, meetup, Linkedin, tiktok, instagram,facebook, Bluesky, so it is hard to keep track of the content created so a dedicated app would help.
+I want to build an app that easily allows developer advocates to keep track of all the content they create. 
+
+Advocates create a mixture of technical blog posts, short form videos for social media, long form youtube videos, webinars, livestreams, workshops, and demo content. They often use different platforms such as twitch, youtube, github, eventbrite, meetup, Linkedin, tiktok, instagram,facebook, Bluesky, so it is hard to keep track of the content created so a dedicated app would help.
 
 I want users to be able to add a link to the content produced, choose the type of content, then click upload. The app then organizes the content for the user and unfurls the URL to show a preview.
 
-They should be able to group related content together, as there are usually campaigns attached to the work.
+They should be able to group related content together, as there are usually campaigns attached to the work produced.
 
-The aim is VERY LOW FRICTION tracking, as advocates are usually very busy.
+The aim of this app is VERY LOW FRICTION tracking, as advocates are usually very busy.
+
 Core flow: paste URL → auto-categorize → organize.
 
 ### App Name: AdvocateHub
