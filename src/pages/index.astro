@@ -1,0 +1,238 @@
+---
+import Layout from "layouts/Layout.astro";
+import { Hero } from "@libs/ui/blocks/Hero";
+import { Structure } from "@libs/ui/blocks/Structure";
+import { TechStack } from "@libs/ui/blocks/TechStack";
+import { Features } from "@libs/ui/blocks/Features";
+import { Commands } from "@libs/ui/blocks/Commands";
+import { ContactButton } from "@libs/ui/components/ContactButton";
+---
+
+<Layout
+    title="Astro Starter Template"
+    description="A modern, performance-focused starter template combining Astro with React"
+>
+    <main class="bg-secondary">
+        <Hero
+            title="🚀 Modern Astro Starter Template"
+            description="A performance-driven starter template integrating Astro with React, designed for static site generation with dynamic UI components."
+            client:load
+        />
+        <Structure
+            title="Project Structure"
+            description="Organized using a libs system for better modularity and scalability"
+            items={[
+                {
+                    name: "src",
+                    type: "folder",
+                    items: [
+                        {
+                            name: "layouts",
+                            type: "folder",
+                            description:
+                                "Base layouts and SEO meta configurations",
+                        },
+                        {
+                            name: "libs",
+                            type: "folder",
+                            items: [
+                                {
+                                    name: "ui",
+                                    type: "folder",
+                                    description:
+                                        "All components, blocks, modules - reusable elements",
+                                    items: [
+                                        { name: "blocks", type: "folder" },
+                                        { name: "components", type: "folder" },
+                                        { name: "modules", type: "folder" },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            name: "pages",
+                            type: "folder",
+                            description:
+                                "Astro pages (each file maps to a route)",
+                        },
+                        {
+                            name: "static",
+                            type: "folder",
+                            description:
+                                "All static assets - images, icons, fonts",
+                        },
+                    ],
+                },
+                {
+                    name: "public",
+                    type: "folder",
+                    description: "Public assets (served as-is)",
+                },
+                {
+                    name: "astro.config.mjs",
+                    type: "file",
+                    description: "Astro configuration",
+                },
+                {
+                    name: "tailwind.config.js",
+                    type: "file",
+                    description: "Tailwind configuration",
+                },
+                {
+                    name: "tsconfig.json",
+                    type: "file",
+                    description: "TypeScript configuration",
+                },
+            ]}
+            client:visible
+        />
+        <TechStack
+            title="Tech Stack"
+            description="Carefully selected technologies for the best developer experience and performance"
+            technologies={[
+                {
+                    name: "Astro",
+                    description:
+                        "Modern Static Site Generator with partial hydration",
+                    link: "https://astro.build/",
+                    benefits: [
+                        "Zero-JS by default for better performance",
+                        "Partial hydration for interactive components",
+                        "Built-in image optimization",
+                        "Automatic sitemap generation",
+                    ],
+                },
+                {
+                    name: "React",
+                    description: "Component-Based UI library",
+                    link: "https://reactjs.org/",
+                    benefits: [
+                        "Component-driven development",
+                        "Rich ecosystem of libraries",
+                        "Strong community support",
+                        "Reusable UI components",
+                    ],
+                },
+                {
+                    name: "Tailwind CSS",
+                    description: "Utility-First CSS Framework",
+                    link: "https://tailwindcss.com/",
+                    benefits: [
+                        "Rapid UI development",
+                        "No CSS file maintenance",
+                        "Consistent design system",
+                        "Built-in responsive design",
+                    ],
+                },
+                {
+                    name: "Lucide React",
+                    description: "Beautiful & consistent icons",
+                    link: "https://lucide.dev/",
+                    benefits: [
+                        "Lightweight SVG icons",
+                        "Tree-shakeable imports",
+                        "Consistent design language",
+                        "TypeScript support",
+                    ],
+                },
+                {
+                    name: "TypeScript",
+                    description: "Type Safety & Enhanced Developer Experience",
+                    link: "https://www.typescriptlang.org/",
+                    benefits: [
+                        "Type safety across the project",
+                        "Better IDE support",
+                        "Reduced runtime errors",
+                        "Enhanced code maintainability",
+                    ],
+                },
+            ]}
+            client:visible
+        />
+        <Features
+            title="Features"
+            description="Everything you need to build modern, SEO-friendly static websites"
+            features={[
+                {
+                    title: "Project Structure",
+                    description:
+                        "Organized using a libs system for reusability and modular architecture.",
+                    icon: "fileJson",
+                },
+                {
+                    title: "Static Media",
+                    description:
+                        "Self-hosted fonts and optimized images with TypeScript support.",
+                    icon: "image",
+                },
+                {
+                    title: "SEO Ready",
+                    description:
+                        "Automatic sitemap generation and meta configurations.",
+                    icon: "fileJson",
+                },
+                {
+                    title: "Modern Stack",
+                    description: "Astro + React + TypeScript + Tailwind CSS.",
+                    icon: "code",
+                },
+                {
+                    title: "Performance",
+                    description:
+                        "Optimized assets and lightweight HTML structure.",
+                    icon: "zap",
+                },
+                {
+                    title: "Styling System",
+                    description: "Utility-first approach with Tailwind CSS.",
+                    icon: "palette",
+                },
+            ]}
+            client:visible
+        />
+        <Commands
+            headers={[
+                {
+                    title: "Command",
+                },
+                {
+                    title: "npm",
+                },
+                {
+                    title: "yarn",
+                },
+                {
+                    title: "Action",
+                },
+            ]}
+            commands={[
+                {
+                    command: "Install",
+                    npm: "npm install",
+                    yarn: "yarn install",
+                    description: "Installs dependencies",
+                },
+                {
+                    command: "Dev",
+                    npm: "npm run dev",
+                    yarn: "yarn dev",
+                    description: "Starts local dev server at localhost:4321",
+                },
+                {
+                    command: "Build",
+                    npm: "npm run build",
+                    yarn: "yarn build",
+                    description: "Build your production site to ./dist/",
+                },
+                {
+                    command: "Preview",
+                    npm: "npm run preview",
+                    yarn: "yarn preview",
+                    description: "Preview your build locally, before deploying",
+                },
+            ]}
+            client:visible
+        />
+        <ContactButton client:visible />
+    </main>
+</Layout>

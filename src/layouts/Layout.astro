@@ -1,0 +1,35 @@
+---
+import "./global.css";
+import { PreviewPng } from "@static/images";
+import MetaConfig from "./MetaConfig.astro";
+
+type Props = {
+    title: string;
+    description: string;
+    overwritePreview?: string;
+};
+
+const { title, description, overwritePreview } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <MetaConfig
+            title={title}
+            description={description}
+            preview={overwritePreview ? overwritePreview : PreviewPng.src}
+        />
+    </head>
+    <body class="bg-secondary">
+        <slot />
+
+        <style is:global>
+            /* Improve Page speed */
+            /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+            img {
+                content-visibility: auto;
+            }
+        </style>
+    </body>
+</html>
