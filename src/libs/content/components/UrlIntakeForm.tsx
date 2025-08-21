@@ -55,40 +55,55 @@ export const UrlIntakeForm: React.FC<Props> = ({ onDuplicate }) => {
   }, [url, manualType, onDuplicate]);
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-5 card-base bg-white/80">
-      <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium" htmlFor="url-input">Add URL</label>
-        <input
-          id="url-input"
-          className="input"
-          value={url}
-          placeholder="Paste a link and press Enter"
-          onChange={e => setUrl(e.target.value)}
-          onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) handleSubmit(); }}
-        />
-        {error && <p className="text-xs text-red-600" role="alert">{error}</p>}
-      </div>
-      <div className="flex items-center gap-2 flex-wrap">
-        <label className="text-xs uppercase tracking-wide text-ink/60" htmlFor="type-select">Type Override</label>
-        <select
-          id="type-select"
-          className="select"
-          value={manualType}
-          onChange={e => setManualType(e.target.value as ContentType | '')}
-        >
-          <option value="">Auto</option>
-          <option value="blog">Blog</option>
-            <option value="video">Video</option>
-            <option value="social">Social</option>
-            <option value="workshop">Workshop</option>
-            <option value="demo">Demo</option>
-            <option value="other">Other</option>
-        </select>
-  <button type="submit" className="ml-auto btn btn-primary text-xs">Save</button>
-      </div>
-      {toast && (
-  <div className="text-xs text-ink/70" role="status" onAnimationEnd={() => setToast(null)}>{toast}</div>
-      )}
-    </form>
+    <div className="card-base p-6 bg-white border border-surface-subtle">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-medium text-ink" htmlFor="url-input">Add URL</label>
+            <span className="text-xs text-ink/50">Auto-detect</span>
+          </div>
+          <input
+            id="url-input"
+            className="input text-sm"
+            value={url}
+            placeholder="Paste your content URL here... ✨"
+            onChange={e => setUrl(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) handleSubmit(); }}
+          />
+          {error && <p className="text-xs text-red-600" role="alert">{error}</p>}
+        </div>
+        
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <label className="text-xs font-medium text-ink/60" htmlFor="type-select">
+              Type Override
+            </label>
+            <select
+              id="type-select"
+              className="select text-xs"
+              value={manualType}
+              onChange={e => setManualType(e.target.value as ContentType | '')}
+            >
+              <option value="">Auto</option>
+              <option value="blog">Blog</option>
+              <option value="video">Video</option>
+              <option value="social">Social</option>
+              <option value="workshop">Workshop</option>
+              <option value="demo">Demo</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit" className="btn btn-primary text-sm px-6">
+            Capture
+          </button>
+        </div>
+        
+        {toast && (
+          <div className="text-sm text-emerald-600 font-medium" role="status" onAnimationEnd={() => setToast(null)}>
+            ✅ {toast}
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
