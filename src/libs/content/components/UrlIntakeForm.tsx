@@ -84,13 +84,13 @@ export const UrlIntakeForm: React.FC<Props> = ({ onDuplicate }) => {
               value={manualType}
               onChange={e => setManualType(e.target.value as ContentType | '')}
             >
-              <option value="">Auto</option>
-              <option value="blog">Blog</option>
-              <option value="video">Video</option>
-              <option value="social">Social</option>
-              <option value="workshop">Workshop</option>
-              <option value="demo">Demo</option>
-              <option value="other">Other</option>
+              <option value="">🪄 Auto-detect (Magical!)</option>
+              <option value="blog">📝 Blog Post</option>
+              <option value="video">🎥 Video Content</option>
+              <option value="workshop">🎓 Workshop/Tutorial</option>
+              <option value="social">🎙️ Livestream</option>
+              <option value="demo">📺 Demo/Showcase</option>
+              <option value="other">🎤 Podcast</option>
             </select>
           </div>
           <button type="submit" className="btn btn-primary text-sm px-6">
