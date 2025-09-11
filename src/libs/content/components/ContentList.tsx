@@ -1,21 +1,39 @@
 import React from 'react';
 import { subscribe, load } from '../contentStore';
-import type { ContentItem } from '../types';
+import type { ContentItem, ContentType } from '../types';
 import { ContentCard } from './ContentCard';
 
 interface Props {
   highlightId?: string | null;
 }
 
+type FilterType = 'all' | ContentType;
+
+const filterOptions = [
+  { value: 'all' as FilterType, label: '⭐ All Content', icon: '⭐' },
+  { value: 'video' as FilterType, label: '🎥 Videos', icon: '🎥' },
+  { value: 'blog' as FilterType, label: '📝 Blogs', icon: '📝' },
+  { value: 'workshop' as FilterType, label: '🎓 Workshops', icon: '🎓' },
+  { value: 'other' as FilterType, label: '🎙️ Podcasts', icon: '🎙️' },
+  { value: 'social' as FilterType, label: '🎤 Talks', icon: '🎤' },
+];
+
 export const ContentList: React.FC<Props> = ({ highlightId }) => {
   const [items, setItems] = React.useState<ContentItem[]>([]);
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
+  const [filter, setFilter] = React.useState<FilterType>('all');
   
   React.useEffect(() => {
     load();
     const unsub = subscribe(setItems);
     return () => unsub();
   }, []);
+
+  // Filter items based on selected filter
+  const filteredItems = React.useMemo(() => {
+    if (filter === 'all') return items;
+    return items.filter(item => item.type === filter);
+  }, [items, filter]);
   
   if (!items.length) {
     return (
@@ -30,13 +48,40 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
       </div>
     );
   }
+
+  const selectedFilter = filterOptions.find(opt => opt.value === filter) || filterOptions[0];
   
   return (
     <div className="space-y-4">
       {/* View Controls */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-ink/60">
-          <span>All Content</span>
+        <div className="flex items-center gap-2">
+          {/* Filter icon */}
+          <svg className="w-4 h-4 text-ink/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          
+          {/* Filter Dropdown */}
+          <div className="relative">
+            <select 
+              className="appearance-none bg-white border border-surface-subtle rounded-lg px-3 py-2 pr-8 text-sm text-ink/80 cursor-pointer hover:border-brand focus:border-brand focus:outline-none transition-colors"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as FilterType)}
+            >
+              {filterOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            
+            {/* Custom dropdown arrow */}
+            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+              <svg className="w-4 h-4 text-ink/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         </div>
         <div className="flex items-center gap-1 bg-white border border-surface-subtle rounded-lg p-1">
           <button
@@ -73,7 +118,7 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
         ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" 
         : "grid gap-4"
       }>
-        {items.map(i => 
+        {filteredItems.map(i => 
           <ContentCard 
             key={i.id} 
             item={i} 
@@ -82,6 +127,17 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
           />
         )}
       </div>
+      
+      {/* No filtered results message */}
+      {filteredItems.length === 0 && items.length > 0 && (
+        <div className="text-center py-8">
+          <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-pastel-sky flex items-center justify-center">
+            <span className="text-lg">{selectedFilter.icon}</span>
+          </div>
+          <p className="text-sm text-ink/60 mb-1">No {filter === 'all' ? 'content' : selectedFilter.label.toLowerCase()} found</p>
+          <p className="text-xs text-ink/40">Try selecting a different filter or add more content</p>
+        </div>
+      )}
     </div>
   );
 };
