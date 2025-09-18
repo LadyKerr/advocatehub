@@ -11,11 +11,17 @@ type FilterType = 'all' | ContentType;
 
 const filterOptions = [
   { value: 'all' as FilterType, label: '⭐ All Content', icon: '⭐' },
-  { value: 'video' as FilterType, label: '🎥 Videos', icon: '🎥' },
   { value: 'blog' as FilterType, label: '📝 Blogs', icon: '📝' },
+  { value: 'video' as FilterType, label: '🎥 Videos', icon: '🎥' },
+  { value: 'podcast' as FilterType, label: '🎙️ Podcasts', icon: '🎙️' },
+  { value: 'livestream' as FilterType, label: '� Livestreams', icon: '📺' },
+  { value: 'webinar' as FilterType, label: '📊 Webinars', icon: '📊' },
+  { value: 'newsletter' as FilterType, label: '📧 Newsletters', icon: '�' },
   { value: 'workshop' as FilterType, label: '🎓 Workshops', icon: '🎓' },
-  { value: 'other' as FilterType, label: '🎙️ Podcasts', icon: '🎙️' },
-  { value: 'social' as FilterType, label: '🎤 Talks', icon: '🎤' },
+  { value: 'demo' as FilterType, label: '🚀 Demos', icon: '🚀' },
+  { value: 'social' as FilterType, label: '💬 Social', icon: '💬' },
+  { value: 'speaking' as FilterType, label: '🎤 Speaking', icon: '🎤' },
+  { value: 'other' as FilterType, label: '📎 Other', icon: '📎' },
 ];
 
 export const ContentList: React.FC<Props> = ({ highlightId }) => {

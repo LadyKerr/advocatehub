@@ -87,10 +87,15 @@ export const UrlIntakeForm: React.FC<Props> = ({ onDuplicate }) => {
               <option value="">🪄 Auto-detect (Magical!)</option>
               <option value="blog">📝 Blog Post</option>
               <option value="video">🎥 Video Content</option>
-              <option value="workshop">🎓 Workshop/Tutorial</option>
-              <option value="social">🎙️ Livestream</option>
-              <option value="demo">📺 Demo/Showcase</option>
-              <option value="other">🎤 Podcast</option>
+              <option value="podcast">�️ Podcast</option>
+              <option value="livestream">📺 Livestream</option>
+              <option value="webinar">📊 Webinar/Event</option>
+              <option value="newsletter">📧 Newsletter</option>
+              <option value="workshop">� Workshop/Tutorial</option>
+              <option value="demo">� Demo/Showcase</option>
+              <option value="social">💬 Social Post</option>
+              <option value="speaking">🎤 Speaking/Talk</option>
+              <option value="other">📎 Other</option>
             </select>
           </div>
           <button type="submit" className="btn btn-primary text-sm px-6">

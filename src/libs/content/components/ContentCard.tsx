@@ -50,6 +50,11 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
                   {item.type === 'social' && '💬'}
                   {item.type === 'workshop' && '🎓'}
                   {item.type === 'demo' && '🚀'}
+                  {item.type === 'podcast' && '🎙️'}
+                  {item.type === 'livestream' && '📺'}
+                  {item.type === 'webinar' && '📊'}
+                  {item.type === 'newsletter' && '📧'}
+                  {item.type === 'speaking' && '🎤'}
                   {item.type === 'other' && '📎'}
                 </div>
                 <span className="text-sm text-ink/60 font-medium">{item.platform}</span>
@@ -100,6 +105,11 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
                 <option value="social">💬 social</option>
                 <option value="workshop">🎓 workshop</option>
                 <option value="demo">🚀 demo</option>
+                <option value="podcast">🎙️ podcast</option>
+                <option value="livestream">📺 livestream</option>
+                <option value="webinar">📊 webinar</option>
+                <option value="newsletter">📧 newsletter</option>
+                <option value="speaking">🎤 speaking</option>
                 <option value="other">📎 other</option>
               </select>
               
@@ -161,6 +171,11 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
                   {item.type === 'social' && '💬'}
                   {item.type === 'workshop' && '🎓'}
                   {item.type === 'demo' && '🚀'}
+                  {item.type === 'podcast' && '🎙️'}
+                  {item.type === 'livestream' && '📺'}
+                  {item.type === 'webinar' && '📊'}
+                  {item.type === 'newsletter' && '📧'}
+                  {item.type === 'speaking' && '🎤'}
                   {item.type === 'other' && '📎'}
                 </div>
                 <span className="text-[10px] text-ink/60 font-medium">{item.platform}</span>
@@ -208,6 +223,11 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
               <option value="social">💬 social</option>
               <option value="workshop">🎓 workshop</option>
               <option value="demo">🚀 demo</option>
+              <option value="podcast">🎙️ podcast</option>
+              <option value="livestream">📺 livestream</option>
+              <option value="webinar">📊 webinar</option>
+              <option value="newsletter">📧 newsletter</option>
+              <option value="speaking">🎤 speaking</option>
               <option value="other">📎 other</option>
             </select>
             

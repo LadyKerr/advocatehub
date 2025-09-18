@@ -1,9 +1,10 @@
-import type { PlatformDetection, ContentType } from './types';
+// Simple test to verify platform detection for new content types
+// This uses Node.js without any framework dependencies
 
-// Basic hostname/path heuristics. Extend over time.
-export function platformDetector(rawUrl: string): PlatformDetection {
+// Copy the platform detection logic
+function platformDetector(rawUrl) {
   let platform = 'unknown';
-  let suggestedType: ContentType = 'other';
+  let suggestedType = 'other';
   try {
     const u = new URL(rawUrl);
     const host = u.hostname.replace(/^www\./, '').toLowerCase();
@@ -74,3 +75,43 @@ export function platformDetector(rawUrl: string): PlatformDetection {
   }
   return { platform, suggestedType };
 }
+
+// Test cases for new content types
+const testUrls = [
+  // Podcasts
+  'https://open.spotify.com/episode/abc123',
+  'https://podcasts.apple.com/us/podcast/some-podcast/id123456',
+  'https://anchor.fm/my-podcast',
+  
+  // Newsletters
+  'https://newsletter.substack.com/p/latest-post',
+  'https://myblog.ghost.io/newsletter-post',
+  
+  // Events/Webinars
+  'https://www.eventbrite.com/e/tech-webinar-tickets-123456',
+  'https://lu.ma/event/developer-meetup',
+  'https://www.meetup.com/tech-group/events/123456',
+  
+  // Demos
+  'https://codepen.io/user/pen/abc123',
+  'https://codesandbox.io/s/react-demo-abc123',
+  'https://replit.com/@user/my-project',
+  
+  // Livestreams
+  'https://www.twitch.tv/developer_streams',
+  
+  // Existing types (should still work)
+  'https://youtube.com/watch?v=abc123',
+  'https://dev.to/user/my-blog-post',
+  'https://github.com/user/repo'
+];
+
+console.log('Testing Enhanced Content Type Detection:\n');
+
+testUrls.forEach(url => {
+  const result = platformDetector(url);
+  console.log(`URL: ${url}`);
+  console.log(`  Platform: ${result.platform}`);
+  console.log(`  Type: ${result.suggestedType}`);
+  console.log('');
+});

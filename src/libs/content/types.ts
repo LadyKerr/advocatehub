@@ -1,4 +1,4 @@
-export type ContentType = 'blog' | 'video' | 'social' | 'workshop' | 'demo' | 'other';
+export type ContentType = 'blog' | 'video' | 'social' | 'workshop' | 'demo' | 'podcast' | 'livestream' | 'webinar' | 'newsletter' | 'speaking' | 'other';
 
 export interface ContentItem {
   id: string;
