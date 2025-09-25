@@ -98,7 +98,7 @@ export class ExportUtils {
 
       // Title
       doc.setFontSize(20);
-      doc.setFont(undefined, 'bold');
+      doc.setFont('helvetica', 'bold');
       const title = template === 'portfolio' ? 'Content Portfolio' : 
                    template === 'summary' ? 'Content Summary' : 'Content Report';
       doc.text(title, pageWidth / 2, yPosition, { align: 'center' });
@@ -106,7 +106,7 @@ export class ExportUtils {
 
       // Export info
       doc.setFontSize(10);
-      doc.setFont(undefined, 'normal');
+      doc.setFont('helvetica', 'normal');
       doc.text(`Generated: ${new Date().toLocaleDateString()}`, margin, yPosition);
       yPosition += 5;
       doc.text(`Total Items: ${items.length}`, margin, yPosition);
@@ -124,14 +124,14 @@ export class ExportUtils {
 
         // Item title
         doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
+        doc.setFont('helvetica', 'bold');
         const titleLines = doc.splitTextToSize(item.title, pageWidth - 2 * margin);
         doc.text(titleLines, margin, yPosition);
         yPosition += titleLines.length * 5 + 5;
 
         // Item details
         doc.setFontSize(9);
-        doc.setFont(undefined, 'normal');
+        doc.setFont('helvetica', 'normal');
         
         // Type and date
         doc.text(`Type: ${item.type} | Published: ${new Date(item.publishedAt).toLocaleDateString()}`, margin, yPosition);

@@ -3,3 +3,4 @@ export * from "./Structure";
 export * from "./TechStack";
 export * from "./Features";
 export * from "./Commands";
+export * from "./IntegrationHub";

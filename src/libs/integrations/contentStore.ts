@@ -2,6 +2,9 @@
 
 import type { ContentItem, IntegrationConfig, ExportConfig, ImportResult } from '../../types/integration';
 
+// Constants
+const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
+
 // Simple in-memory storage (in production, this would be replaced with a database)
 class ContentStore {
   private content: ContentItem[] = [];
@@ -43,7 +46,7 @@ class ContentStore {
     return this.content.find(c => 
       (item.url && c.url === item.url) ||
       (item.importSource?.originalId && c.importSource?.originalId === item.importSource.originalId) ||
-      (item.title && c.title === item.title && Math.abs(new Date(c.publishedAt).getTime() - new Date(item.publishedAt || '').getTime()) < 24 * 60 * 60 * 1000)
+      (item.title && c.title === item.title && Math.abs(new Date(c.publishedAt).getTime() - new Date(item.publishedAt || '').getTime()) < ONE_DAY_IN_MS)
     ) || null;
   }
 
@@ -146,7 +149,7 @@ class ContentStore {
 
   // Utility methods
   private generateId(): string {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
   }
 
   // Export helpers

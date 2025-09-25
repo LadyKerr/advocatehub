@@ -66,7 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Return file data for download
-    const responseData = config.format === 'pdf' ? result.data : result.data;
+    const responseData = result.data;
     
     return new Response(responseData, {
       status: 200,

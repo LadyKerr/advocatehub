@@ -152,6 +152,26 @@ export class RSSFeedParser {
     }
   }
 
+  private isVideoUrl(url?: string): boolean {
+    if (!url) return false;
+    
+    try {
+      const parsedUrl = new URL(url);
+      const hostname = parsedUrl.hostname.toLowerCase();
+      
+      // Check for exact domain matches or proper subdomains
+      return hostname === 'youtube.com' || 
+             hostname === 'www.youtube.com' || 
+             hostname === 'youtu.be' ||
+             hostname === 'vimeo.com' || 
+             hostname === 'www.vimeo.com' ||
+             hostname.endsWith('.youtube.com') ||
+             hostname.endsWith('.vimeo.com');
+    } catch {
+      return false;
+    }
+  }
+
   private detectContentType(item: RSSItem): ContentItem['type'] {
     const title = (item.title || '').toLowerCase();
     const categories = (item.categories || []).map(cat => cat.toLowerCase());
@@ -159,8 +179,7 @@ export class RSSFeedParser {
     // Check for video indicators
     if (categories.some(cat => cat.includes('video')) || 
         title.includes('video') || 
-        item.link?.includes('youtube.com') || 
-        item.link?.includes('vimeo.com')) {
+        this.isVideoUrl(item.link)) {
       return 'video';
     }
     

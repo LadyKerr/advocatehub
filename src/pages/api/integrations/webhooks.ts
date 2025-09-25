@@ -10,7 +10,9 @@ export const POST: APIRoute = async ({ request, params }) => {
   try {
     const platform = params.platform as string;
     const body = await request.text();
-    const headers = Object.fromEntries(request.headers.entries());
+    const headers = Object.fromEntries(
+      Array.from(request.headers.entries()).map(([key, value]) => [key.toLowerCase(), value])
+    );
 
     // Get webhook configuration
     const integrations = await contentStore.getAllIntegrations();
@@ -182,7 +184,7 @@ async function processGitHubWebhook(payload: WebhookPayload): Promise<Partial<Co
           },
           metadata: {
             repository: data.repository.full_name,
-            author: commit.author.name,
+            author: commit.author?.name || 'Unknown',
             commitId: commit.id,
             branch: data.ref.replace('refs/heads/', '')
           }
