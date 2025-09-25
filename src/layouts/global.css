@@ -28,6 +28,15 @@ body { background: var(--color-bg-alt); color: var(--color-text); line-height: 1
 *::-webkit-scrollbar-track { background: var(--color-bg-alt); }
 *::-webkit-scrollbar-thumb { background: linear-gradient(var(--color-accent), #B5A3FF); border-radius: 20px; }
 
+/* Search highlighting */
+mark {
+	background-color: #fef08a;
+	color: #78716c;
+	padding: 1px 2px;
+	border-radius: 2px;
+	font-weight: 500;
+}
+
 /* Component style helpers */
 .card-base { 
   border: 1px solid var(--color-border); 

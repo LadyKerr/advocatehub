@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import type { ContentItem, ContentType } from '../types';
 import { update } from '../contentStore';
+import { highlightSearchTerms } from '../searchUtils';
 
 interface Props {
   item: ContentItem;
   highlight?: boolean;
   viewMode?: 'grid' | 'list';
+  searchQuery?: string;
 }
 
 const statusColors: Record<ContentItem['unfurlStatus'], string> = {
@@ -14,7 +16,7 @@ const statusColors: Record<ContentItem['unfurlStatus'], string> = {
   error: 'bg-rose-500',
 };
 
-export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list' }) => {
+export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list', searchQuery = '' }) => {
   const [editingTags, setEditingTags] = useState(false);
   const [tagInput, setTagInput] = useState('');
 
@@ -28,6 +30,21 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
   };
 
   const changeType = (t: ContentType) => update(item.id, { type: t });
+
+  // Helper component for highlighted text
+  const HighlightedText: React.FC<{ text: string; className?: string }> = ({ text, className = '' }) => {
+    if (!searchQuery.trim()) {
+      return <span className={className}>{text}</span>;
+    }
+    
+    const highlightedHtml = highlightSearchTerms(text, searchQuery);
+    return (
+      <span 
+        className={className}
+        dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+      />
+    );
+  };
 
   if (viewMode === 'grid') {
     return (
@@ -74,7 +91,7 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
                 rel="noopener" 
                 className="font-semibold text-sm text-ink hover:text-brand transition-colors line-clamp-2 leading-tight flex-1"
               >
-                {item.title || item.url}
+                <HighlightedText text={item.title || item.url} />
               </a>
               <div className="flex items-center gap-1 flex-shrink-0">
                 <span className={`status-dot ${statusColors[item.unfurlStatus]} ${item.unfurlStatus==='pending' ? 'animate-pulse' : ''}`}></span>
@@ -86,7 +103,7 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
             
             {item.description && (
               <p className="text-xs text-ink/60 line-clamp-2 leading-relaxed">
-                {item.description}
+                <HighlightedText text={item.description} />
               </p>
             )}
           </div>
@@ -114,14 +131,16 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
               </select>
               
               <span className="text-xs px-2 py-1 bg-pastel-sky rounded-md text-ink/70 font-medium">
-                {item.platform}
+                <HighlightedText text={item.platform} />
               </span>
             </div>
             
             {/* Tags */}
             <div className="flex items-center gap-1 flex-wrap min-h-[24px]">
               {(item.tags || []).map(t => (
-                <span key={t} className="tag text-xs">{t}</span>
+                <span key={t} className="tag text-xs">
+                  <HighlightedText text={t} />
+                </span>
               ))}
               {editingTags ? (
                 <input
@@ -195,11 +214,11 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
                 rel="noopener" 
                 className="font-semibold text-sm text-ink hover:text-brand transition-colors line-clamp-2 leading-snug"
               >
-                {item.title || item.url}
+                <HighlightedText text={item.title || item.url} />
               </a>
               {item.description && (
                 <p className="text-xs text-ink/60 mt-1 line-clamp-2 leading-relaxed">
-                  {item.description}
+                  <HighlightedText text={item.description} />
                 </p>
               )}
             </div>
@@ -232,12 +251,14 @@ export const ContentCard: React.FC<Props> = ({ item, highlight, viewMode = 'list
             </select>
             
             <span className="text-xs px-2 py-1 bg-pastel-sky rounded-md text-ink/70 font-medium">
-              {item.platform}
+              <HighlightedText text={item.platform} />
             </span>
             
             <div className="flex items-center gap-1 flex-wrap">
               {(item.tags || []).map(t => (
-                <span key={t} className="tag text-xs">{t}</span>
+                <span key={t} className="tag text-xs">
+                  <HighlightedText text={t} />
+                </span>
               ))}
               {editingTags ? (
                 <input

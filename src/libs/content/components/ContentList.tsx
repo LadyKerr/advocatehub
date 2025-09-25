@@ -2,6 +2,8 @@ import React from 'react';
 import { subscribe, load } from '../contentStore';
 import type { ContentItem, ContentType } from '../types';
 import { ContentCard } from './ContentCard';
+import { SearchBar } from './SearchBar';
+import { searchContentItems } from '../searchUtils';
 
 interface Props {
   highlightId?: string | null;
@@ -28,6 +30,7 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
   const [items, setItems] = React.useState<ContentItem[]>([]);
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
   const [filter, setFilter] = React.useState<FilterType>('all');
+  const [searchQuery, setSearchQuery] = React.useState<string>('');
   
   React.useEffect(() => {
     load();
@@ -35,11 +38,22 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
     return () => unsub();
   }, []);
 
-  // Filter items based on selected filter
+  // Filter and search items
   const filteredItems = React.useMemo(() => {
-    if (filter === 'all') return items;
-    return items.filter(item => item.type === filter);
-  }, [items, filter]);
+    let result = items;
+    
+    // Apply type filter
+    if (filter !== 'all') {
+      result = result.filter(item => item.type === filter);
+    }
+    
+    // Apply search
+    if (searchQuery.trim()) {
+      result = searchContentItems(result, searchQuery);
+    }
+    
+    return result;
+  }, [items, filter, searchQuery]);
   
   if (!items.length) {
     return (
@@ -59,6 +73,13 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
   
   return (
     <div className="space-y-4">
+      {/* Search Bar */}
+      <SearchBar 
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        placeholder="Search content, tags, platforms, titles..."
+      />
+      
       {/* View Controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -130,6 +151,7 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
             item={i} 
             highlight={i.id === highlightId} 
             viewMode={viewMode}
+            searchQuery={searchQuery}
           />
         )}
       </div>
@@ -138,10 +160,34 @@ export const ContentList: React.FC<Props> = ({ highlightId }) => {
       {filteredItems.length === 0 && items.length > 0 && (
         <div className="text-center py-8">
           <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-pastel-sky flex items-center justify-center">
-            <span className="text-lg">{selectedFilter.icon}</span>
+            {searchQuery ? (
+              <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            ) : (
+              <span className="text-lg">{selectedFilter.icon}</span>
+            )}
           </div>
-          <p className="text-sm text-ink/60 mb-1">No {filter === 'all' ? 'content' : selectedFilter.label.toLowerCase()} found</p>
-          <p className="text-xs text-ink/40">Try selecting a different filter or add more content</p>
+          <p className="text-sm text-ink/60 mb-1">
+            {searchQuery 
+              ? `No content found for "${searchQuery}"` 
+              : `No ${filter === 'all' ? 'content' : selectedFilter.label.toLowerCase()} found`
+            }
+          </p>
+          <p className="text-xs text-ink/40">
+            {searchQuery 
+              ? 'Try different search terms or clear the search to see all content'
+              : 'Try selecting a different filter or add more content'
+            }
+          </p>
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="mt-3 text-sm text-brand hover:text-brand-fg underline"
+            >
+              Clear search
+            </button>
+          )}
         </div>
       )}
     </div>
