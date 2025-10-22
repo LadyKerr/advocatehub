@@ -1,0 +1,119 @@
+---
+import Layout from "layouts/Layout.astro";
+import { ContentPerformanceDashboard } from "@libs/ui/components/ContentPerformanceDashboard";
+import { PlatformAnalytics } from "@libs/ui/components/PlatformAnalytics";
+import { ContentCalendar } from "@libs/ui/components/ContentCalendar";
+import { sampleContentData } from "../data/sampleContent";
+import { BarChart3, TrendingUp, Calendar } from "lucide-react";
+---
+
+<Layout
+    title="Analytics Dashboard - AdvocateHub"
+    description="Track your content performance, analyze platform metrics, and visualize your publishing calendar"
+>
+    <main class="bg-secondary min-h-screen">
+        {/* Hero Section */}
+        <div class="bg-primary/5 border-b border-primary/10">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <h1 class="text-h1-md md:text-h1 font-bold text-primary mb-4">
+                    📊 Analytics Dashboard
+                </h1>
+                <p class="text-p-md md:text-p text-primary/80 max-w-3xl">
+                    Track your content performance, identify trends, and optimize your advocacy strategy with comprehensive analytics.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 py-12 space-y-12">
+            {/* Content Performance Section */}
+            <section id="performance">
+                <div class="flex items-center gap-3 mb-6">
+                    <BarChart3 className="w-8 h-8 text-accent" client:load />
+                    <h2 class="text-h2-md md:text-h2 font-bold text-primary">
+                        Content Performance
+                    </h2>
+                </div>
+                <ContentPerformanceDashboard
+                    contentData={sampleContentData}
+                    client:load
+                />
+            </section>
+
+            {/* Platform Analytics Section */}
+            <section id="platforms">
+                <div class="flex items-center gap-3 mb-6">
+                    <TrendingUp className="w-8 h-8 text-success" client:load />
+                    <h2 class="text-h2-md md:text-h2 font-bold text-primary">
+                        Platform Analytics
+                    </h2>
+                </div>
+                <PlatformAnalytics
+                    contentData={sampleContentData}
+                    client:load
+                />
+            </section>
+
+            {/* Content Calendar Section */}
+            <section id="calendar">
+                <div class="flex items-center gap-3 mb-6">
+                    <Calendar className="w-8 h-8 text-info" client:load />
+                    <h2 class="text-h2-md md:text-h2 font-bold text-primary">
+                        Content Calendar
+                    </h2>
+                </div>
+                <ContentCalendar contentData={sampleContentData} client:load />
+            </section>
+
+            {/* Insights Section */}
+            <section id="insights" class="bg-primary/5 p-8 rounded-xl">
+                <h2 class="text-h3 font-bold text-primary mb-4">
+                    💡 Key Insights
+                </h2>
+                <div class="space-y-4 text-primary/80">
+                    <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
+                        <p>
+                            <strong class="text-primary">Performance Tracking:</strong> Monitor
+                            views, likes, shares, and comments across all your content to understand
+                            what resonates with your audience.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-success rounded-full mt-2"></div>
+                        <p>
+                            <strong class="text-primary">Platform Optimization:</strong> Identify
+                            which platforms perform best for different content types and adjust your
+                            strategy accordingly.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-info rounded-full mt-2"></div>
+                        <p>
+                            <strong class="text-primary">Publishing Patterns:</strong> Use the
+                            calendar view to identify gaps in your content schedule and maintain
+                            consistent engagement with your audience.
+                        </p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-warning rounded-full mt-2"></div>
+                        <p>
+                            <strong class="text-primary">Future Enhancement:</strong> ROI tracking
+                            and conversion attribution coming soon to help connect content performance
+                            to business outcomes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Note about data */}
+            <div class="bg-accent/10 border border-accent/30 p-6 rounded-xl">
+                <p class="text-primary/70 text-sm">
+                    <strong class="text-primary">Note:</strong> This dashboard currently displays
+                    sample data for demonstration purposes. In a production environment, you would
+                    integrate with platform APIs (YouTube Analytics, LinkedIn Analytics, etc.) or
+                    manually enter your content metrics to see real-time performance data.
+                </p>
+            </div>
+        </div>
+    </main>
+</Layout>
