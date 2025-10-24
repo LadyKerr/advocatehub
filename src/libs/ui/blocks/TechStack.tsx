@@ -1,6 +1,7 @@
 import { type FC, useState, useEffect } from "react";
 import { Zap } from "lucide-react";
 import { Skeleton } from "../components/Skeleton";
+import { useLoading } from "../contexts/LoadingContext";
 
 type TechItem = {
     name: string;
@@ -14,6 +15,7 @@ type TechStackProps = {
     title?: string;
     description?: string;
     isLoading?: boolean;
+    loadingKey?: string;
 };
 
 const TechStackSkeleton: FC = () => (
@@ -47,8 +49,11 @@ export const TechStack: FC<TechStackProps> = ({
     technologies,
     title,
     description,
-    isLoading = false,
+    isLoading: isLoadingProp,
+    loadingKey = "techstack",
 }) => {
+    const loadingContext = useLoading(loadingKey);
+    const isLoading = isLoadingProp !== undefined ? isLoadingProp : loadingContext.isLoading;
     const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {

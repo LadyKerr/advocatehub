@@ -8,6 +8,7 @@ import {
     Zap,
 } from "lucide-react";
 import { Skeleton } from "../components/Skeleton";
+import { useLoading } from "../contexts/LoadingContext";
 
 type Feature = {
     title: string;
@@ -20,6 +21,7 @@ type FeaturesProps = {
     description: string;
     features: Feature[];
     isLoading?: boolean;
+    loadingKey?: string;
 };
 
 const FeatureSkeleton: FC = () => (
@@ -35,8 +37,11 @@ export const Features: FC<FeaturesProps> = ({
     title,
     description,
     features,
-    isLoading = false,
+    isLoading: isLoadingProp,
+    loadingKey = "features",
 }) => {
+    const loadingContext = useLoading(loadingKey);
+    const isLoading = isLoadingProp !== undefined ? isLoadingProp : loadingContext.isLoading;
     const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {

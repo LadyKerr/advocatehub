@@ -1,6 +1,7 @@
 import { type FC, useState, useEffect } from "react";
 import { Folder, File, ChevronRight } from "lucide-react";
 import { Skeleton } from "../components/Skeleton";
+import { useLoading } from "../contexts/LoadingContext";
 
 type FileItem = {
     name: string;
@@ -14,6 +15,7 @@ type StructureProps = {
     title?: string;
     description?: string;
     isLoading?: boolean;
+    loadingKey?: string;
 };
 
 const StructureItemSkeleton: FC<{ depth?: number }> = ({ depth = 0 }) => (
@@ -31,8 +33,11 @@ export const Structure: FC<StructureProps> = ({
     items,
     title,
     description,
-    isLoading = false,
+    isLoading: isLoadingProp,
+    loadingKey = "structure",
 }) => {
+    const loadingContext = useLoading(loadingKey);
+    const isLoading = isLoadingProp !== undefined ? isLoadingProp : loadingContext.isLoading;
     const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {
