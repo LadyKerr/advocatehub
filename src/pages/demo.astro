@@ -1,0 +1,25 @@
+---
+import Layout from "layouts/Layout.astro";
+import { LoadingDemo } from "@libs/ui/components/LoadingDemo";
+---
+
+<Layout
+    title="Loading System Demo"
+    description="Interactive demo of the skeleton loading system with shimmer effects"
+>
+    <main class="bg-secondary min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 py-20">
+            <div class="text-center mb-12">
+                <h1 class="text-h1-md md:text-h1 text-primary mb-4">
+                    Skeleton Loading Demo
+                </h1>
+                <p class="text-primary/80 max-w-2xl mx-auto">
+                    Use the controls in the bottom-right corner to toggle loading states
+                    for individual components or all at once.
+                </p>
+            </div>
+            
+            <LoadingDemo client:load />
+        </div>
+    </main>
+</Layout>

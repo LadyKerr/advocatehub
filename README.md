@@ -70,6 +70,40 @@ You can use your own icons or use Lucide React icons - its up to you
   <Icon name="icon" />
 ```
 
+## ⚡ Skeleton Loading System
+
+This template includes a comprehensive skeleton loading system with shimmer effects for enhanced user experience during data loading.
+
+### Features
+
+-   **Shimmer Animation**: Smooth, eye-catching shimmer effects using Tailwind CSS
+-   **Accessibility**: Full ARIA support (aria-busy, aria-live, aria-label)
+-   **Smooth Transitions**: Fade-in effects when content loads
+-   **Context-Based Control**: Global and granular loading state management
+-   **Reusable Components**: Pre-built skeletons for Features, Structure, and TechStack components
+
+### Quick Start
+
+```tsx
+// Using prop-based loading (no context required)
+<Features isLoading={true} {...props} />
+
+// Using context-based loading
+import { LoadingProvider } from "@libs/ui/contexts/LoadingContext";
+
+<LoadingProvider>
+    <Features loadingKey="features" {...props} />
+    <Structure loadingKey="structure" {...props} />
+    <TechStack loadingKey="techstack" {...props} />
+</LoadingProvider>
+```
+
+### Demo
+
+Visit `/demo` route to see the interactive loading demo with controls to toggle loading states.
+
+For detailed documentation, see [LOADING_SYSTEM.md](./LOADING_SYSTEM.md).
+
 ## 💻 Sitemap - robots - SEO ⚠️ IMPORTANT ⚠️
 
 ⚠️ **Search for** ⚠️ **siteUrl** & change website main link to load properly all preview images & ect
