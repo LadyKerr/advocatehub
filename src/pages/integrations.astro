@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { IntegrationHub } from "@libs/ui/blocks/IntegrationHub";
+---
+
+<Layout
+    title="Integration & Automation Hub | AdvocateHub"
+    description="Connect external platforms, automate content capture, and manage data exports with AdvocateHub's Integration Hub"
+>
+    <main class="bg-secondary min-h-screen">
+        <IntegrationHub client:load />
+    </main>
+</Layout>
