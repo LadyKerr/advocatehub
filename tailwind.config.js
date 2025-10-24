@@ -56,6 +56,7 @@ module.exports = {
                 "fade-out": "fade-out 0.5s ease-out",
                 "slide-in": "slide-in 0.5s ease-out",
                 "slide-out": "slide-out 0.5s ease-out",
+                "shimmer": "shimmer 2s infinite",
             },
             keyframes: {
                 "fade-in": {
@@ -73,6 +74,10 @@ module.exports = {
                 "slide-out": {
                     "0%": { transform: "translateY(0)" },
                     "100%": { transform: "translateY(100%)" },
+                },
+                "shimmer": {
+                    "0%": { backgroundPosition: "200% 0" },
+                    "100%": { backgroundPosition: "-200% 0" },
                 },
             },
             spacing: {
