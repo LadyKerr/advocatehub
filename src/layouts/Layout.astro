@@ -21,7 +21,7 @@ const { title, description, overwritePreview } = Astro.props;
             preview={overwritePreview ? overwritePreview : PreviewPng.src}
         />
     </head>
-    <body class="bg-secondary">
+    <body class="min-h-screen text-[var(--color-text)] bg-[var(--color-bg-alt)]">
         <slot />
 
         <style is:global>

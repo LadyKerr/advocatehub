@@ -45,8 +45,19 @@ export default defineConfig({
     ],
     renderers: ["@astrojs/renderer-react"],
     prerender: true,
+    alias: {
+        '@libs': './src/libs',
+        '@pages': './src/pages',
+        '@static': './src/static',
+        '@utils': './src/utils'
+    },
     vite: {
         plugins: [CompressionPlugin(), svgr()],
+        build: {
+            sourcemap: true,
+        },
+        // Silence non-critical missing source map warnings (optional)
+        logLevel: 'info'
     },
     buildOptions: {
         minify: true,
